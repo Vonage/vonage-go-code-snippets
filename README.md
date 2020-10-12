@@ -6,6 +6,15 @@ These code samples are meant to be used for [https://developer.nexmo.com/](https
 
 There are also quickstarts available for: [Python](https://github.com/Vonage/vonage-python-code-snippets), [.NET](https://github.com/Vonage/vonage-dotnet-code-snippets), [Node.js](https://github.com/Vonage/vonage-node-code-snippets), [PHP](https://github.com/Vonage/vonage-php-code-snippets),  [Ruby](https://github.com/Vonage/vonage-ruby-code-snippets) and [cURL](https://github.com/Vonage/vonage-curl-code-snippets).
 
+## Set Up
+
+To use these samples you will first need a [Vonage account](https://dashboard.nexmo.com/sign-up). Once you have your own API credentials, rename the `.env-example` file to `.env` and set the values as required for the snippet(s) you wish to run.
+
+For the examples such as `Receiving SMS` and `Receiving Voice Calls`, you will need to:
+- [buy a number](https://dashboard.nexmo.com/buy-numbers)
+- [install and run Ngrok](https://www.nexmo.com/blog/2017/07/04/local-development-nexmo-ngrok-tunnel-dr)
+
+The [Vonage API Developer](https://developer.nexmo.com/) has everything you need to build connected applications with Vonage APIs. If you have any queries on how to get progress these snippets for your own projects requirements, this dashboard is a great starting point.
 
 ## Licenses
 
