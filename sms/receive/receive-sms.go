@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -30,11 +29,10 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	mux := mux.NewRouter()
-	mux.HandleFunc("/webhook/receive-sms", receiveSms)
+	http.HandleFunc("/webhook/receive-sms", receiveSms)
 
 	log.Print("Listening on port 8080")
-	http.ListenAndServe(":8080", mux)
+	http.ListenAndServe(":8080", nil)
 }
 
 func receiveSms(w http.ResponseWriter, r *http.Request) {
