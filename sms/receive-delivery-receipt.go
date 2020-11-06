@@ -14,14 +14,7 @@ func main() {
 			return
 		}
 
-		if r.FormValue("status") == "delivered" {
-			fmt.Println("Your message to " + r.FormValue("msisdn") + " message id " + r.FormValue("messageId") + ") was delivered.")
-		} else if r.FormValue("status") == "accepted" {
-			fmt.Println("Your message to " + r.FormValue("msisdn") + " message id " + r.FormValue("messageId") + ") was accepted by the carrier.")
-		} else {
-			fmt.Println("Your message to " + r.FormValue("msisdn") + " has a status of: " + r.FormValue("status") + ".")
-			fmt.Println("Check err-code " + r.FormValue("err-code") + " against the documentation.")
-		}
+		fmt.Println("Delivery receipt status: " + r.FormValue("status"))
 	})
 
 	http.ListenAndServe(":8080", nil)
