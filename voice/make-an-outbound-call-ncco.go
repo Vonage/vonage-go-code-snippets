@@ -13,11 +13,11 @@ func main() {
 	auth, _ := vonage.CreateAuthFromAppPrivateKey(APPLICATION_ID, privateKey)
 	client := vonage.NewVoiceClient(auth)
 
-	from := vonage.CallFrom{Type: "phone", Number: FROM_NUMBER}
+	from := vonage.CallFrom{Type: "phone", Number: VONAGE_NUMBER}
 	to := vonage.CallTo{Type: "phone", Number: TO_NUMBER}
 
 	MyNcco := ncco.Ncco{}
-	talk := ncco.TalkAction{Text: "This is the Go code snippets calling to say hello."}
+	talk := ncco.TalkAction{Text: "This is a text to speech call from Vonage"}
 	MyNcco.AddAction(talk)
 
 	// NCCO example
