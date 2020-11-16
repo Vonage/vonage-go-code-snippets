@@ -21,7 +21,7 @@ func answer(w http.ResponseWriter, req *http.Request) {
 
 func main() {
 
-	http.HandleFunc("/answer", answer)
+	http.HandleFunc("/webhooks/answer", answer)
 
-	http.ListenAndServe(":8081", nil)
+	http.ListenAndServe(":3000", nil)
 }
