@@ -10,9 +10,11 @@ import (
 
 func answer(w http.ResponseWriter, req *http.Request) {
 
+	paramKeys, _ := req.URL.Query()["from"]
+
 	MyNcco := ncco.Ncco{}
 
-	talk := ncco.TalkAction{Text: "Thank you for calling."}
+	talk := ncco.TalkAction{Text: "Thank you for calling." + string(paramKeys[0])}
 	MyNcco.AddAction(talk)
 
 	data, _ := json.Marshal(MyNcco)
