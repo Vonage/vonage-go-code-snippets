@@ -14,13 +14,11 @@ func main() {
 	auth := vonage.CreateAuthFromKeySecret(os.Getenv("VONAGE_API_KEY"), os.Getenv("VONAGE_API_SECRET"))
 	verifyClient := vonage.NewVerifyClient(auth)
 
-	response, errResp, err := verifyClient.Check(os.Getenv("REQUEST_ID"), os.Getenv("CODE"))
+	response, errResp, _ := verifyClient.TriggerNextEvent(os.Getenv("REQUEST_ID"))
 
-	if err != nil {
-		fmt.Printf("%#v\n", err)
-	} else if response.Status != "0" {
+	if response.Status != "0" {
 		fmt.Println("Error status " + errResp.Status + ": " + errResp.ErrorText)
 	} else {
-		fmt.Println(response.RequestId + " succeeded")
+		fmt.Println("Advanced to next event")
 	}
 }
