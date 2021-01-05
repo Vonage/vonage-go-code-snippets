@@ -1,44 +1,27 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/vonage/vonage-go-sdk"
-	"github.com/vonage/vonage-go-sdk/ncco"
 )
 
-func answer(w http.ResponseWriter, req *http.Request) {
+func main() {
+	godotenv.Load("../.env")
 
-	MyNcco := ncco.Ncco{}
-
-	talk := ncco.TalkAction{Text: "Thank you for calling."}
-	MyNcco.AddAction(talk)
-
-	data, _ := json.Marshal(MyNcco)
-	fmt.Fprintf(w, "%s", data)
-}
-
-func playAudio(w http.ResponseWriter, req *http.Request) {
-	privateKey, _ := ioutil.ReadFile(PATH_TO_PRIVATE_KEY_FILE)
-	auth, _ := vonage.CreateAuthFromAppPrivateKey("00001111-aaaa-bbbb-cccc-0123456789abcd", privateKey)
+	privateKey, _ := ioutil.ReadFile(os.Getenv("VONAGE_APPLICATION_PRIVATE_KEY_PATH"))
+	auth, _ := vonage.CreateAuthFromAppPrivateKey(os.Getenv("VONAGE_APPLICATION_ID"), privateKey)
 	client := vonage.NewVoiceClient(auth)
 
-	result, _, _ := client.PlayAudioStream("aaaabbbb-0000-1111-2222-abcdef01234567",
-		"https://raw.githubusercontent.com/nexmo-community/ncco-examples/gh-pages/assets/welcome_to_nexmo.mp3",
+	result, _, _ := client.PlayAudioStream(os.Getenv("UUID"),
+		"https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3",
 		vonage.PlayAudioOpts{},
 	)
+
 	// or to stop the audio
-	// result, _, _:= client.StopAudioStream("aaaabbbb-0000-1111-2222-abcdef01234567")
+	// result, _, _:= client.StopAudioStream(os.Getenv("UUID"))
 	fmt.Println("Update message: " + result.Message)
-}
-
-func main() {
-
-	http.HandleFunc("/webhooks/answer", answer)
-	http.HandleFunc("/play-audio", playAudio)
-
-	http.ListenAndServe(":8081", nil)
 }
