@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/vonage/vonage-go-sdk/ncco"
@@ -30,8 +29,6 @@ func answer(w http.ResponseWriter, req *http.Request) {
 	talk := ncco.TalkAction{Text: "Hello please press any key to continue."}
 	MyNcco.AddAction(talk)
 
-	log.Println()
-	log.Println(req.Host)
 	inputAction := ncco.InputAction{EventUrl: []string{"https://demo.ngrok.io/webhooks/dtmf"}, Dtmf: &ncco.DtmfInput{MaxDigits: 1}}
 	MyNcco.AddAction(inputAction)
 
