@@ -29,7 +29,7 @@ func answer(w http.ResponseWriter, req *http.Request) {
 	talk := ncco.TalkAction{Text: "Hello please press any key to continue."}
 	MyNcco.AddAction(talk)
 
-	inputAction := ncco.InputAction{EventUrl: []string{"https://demo.ngrok.io/webhooks/dtmf"}, Dtmf: &ncco.DtmfInput{MaxDigits: 1}}
+	inputAction := ncco.InputAction{EventUrl: []string{"https://" + req.Host + "/webhooks/dtmf"}, Dtmf: &ncco.DtmfInput{MaxDigits: 1}}
 	MyNcco.AddAction(inputAction)
 
 	data, _ := json.Marshal(MyNcco)
